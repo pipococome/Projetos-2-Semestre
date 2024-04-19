@@ -1,0 +1,35 @@
+SELECT id, descricao
+FROM produto
+WHERE precodevenda > (SELECT AVG(precodevenda) FROM produto)
+===============================================================
+
+TESTE INSERT INTO
+
+CREATE TABLE teste(
+ id INTEGER NOT NULL,
+ nome VARCHAR(60),
+ telefone VARCHAR(15),
+ idregiao integer
+ );
+
+ -------
+
+ INSERT INTO teste(id, nome, telefone, idregiao)
+(SELECT id, nome, telefone, idregiao
+FROM cliente)
+
+------
+
+UPDATE teste
+SET idregiao = (SELECT id
+                FROM regiao
+                WHERE descricao = 'SAO PAULO')
+WHERE idregiao = 4
+
+---------------------------
+
+DELETE FROM teste
+WHERE id = (SELECT id
+            FROM regiao
+            WHERE descricao = 'CAMPINAS')
+=================================================

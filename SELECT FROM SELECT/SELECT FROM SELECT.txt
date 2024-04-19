@@ -1,0 +1,6 @@
+SELECT a.id, SUM(a.valorparcela)
+FROM (SELECT v.id, p.parcela, p.valorparcela
+      FROM venda v, vendaparcelas p
+      WHERE v.id = p.idvenda) AS a
+WHERE a.id = 1
+GROUP BY 1

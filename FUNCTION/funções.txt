@@ -1,0 +1,11 @@
+SELECT mensagem ('Gabriel');
+
+delimiter $
+CREATE OR REPLACE FUNCTION soma(n1 FLOAT, n2 FLOAT)
+RETURNS FLOAT 
+BEGIN
+RETURN n1 + n2;
+END $
+delimiter ;
+
+SELECT soma(10,20)

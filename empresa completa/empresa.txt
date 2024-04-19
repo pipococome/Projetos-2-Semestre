@@ -1,0 +1,22 @@
+Trabalhando com a tabela empresa:
+
+SELECT a.id, a.datemissao, b.nome
+FROM venda a, cliente b
+WHERE a.idcliente = b.id
+========================================
+
+SELECT a.id, a.datemissao, b.nome, c.descricao
+FROM venda a, cliente b, formapagto c
+WHERE a.idcliente = b.id
+AND a.idformapagto = c.id
+
+===========================================
+
+SELECT a.id, a.datemissao, b.nome, c.descricao, d.descricao
+FROM venda a, cliente b, formapagto c, produto d, itemvenda e
+WHERE a.idcliente = b.id
+AND a.idformapagto = c.id
+AND a.id = e.idvenda
+AND e.idproduto = d.id
+
+=================================================================

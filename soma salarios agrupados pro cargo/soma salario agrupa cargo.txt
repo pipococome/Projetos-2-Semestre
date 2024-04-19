@@ -1,0 +1,6 @@
+SELECT SUM(salario), idcargo
+FROM empregado e
+WHERE salario > 2500
+GROUP BY idcargo
+HAVING SUM(salario)>2500
+ORDER BY idcargo

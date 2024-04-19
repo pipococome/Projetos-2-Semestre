@@ -1,0 +1,92 @@
+CRIA NOVA TABELA
+
+CREATE TABLE vendaparcelas(
+  id INTEGER NOT NULL,
+  idvenda INTEGER NOT NULL,
+  dataemissao DATE NOT NULL,
+  parcela INTEGER NOT NULL,
+  valorparcela NUMERIC(10,2) NOT NULL,
+  datapagto DATE,
+  PRIMARY KEY(id),
+  FOREIGN KEY(idvenda) REFERENCES venda(id)
+);
+
+ 
+
+INSERT INTO vendaparcelas VALUES(1,1,'2019-01-05',1,100.0, NULL);
+INSERT INTO vendaparcelas VALUES(2,1,'2019-01-05',2,100.0, NULL);
+INSERT INTO vendaparcelas VALUES(3,2,'2019-01-05',1,50.0, NULL);
+INSERT INTO vendaparcelas VALUES(4,2,'2019-01-05',2,50.0, NULL);
+INSERT INTO vendaparcelas VALUES(5,3,'2019-01-05',1,200.0, NULL);
+INSERT INTO vendaparcelas VALUES(6,4,'2019-01-05',1,300.0, NULL);
+
+========================================================================
+
+
+MOSTRA A EMISSÃO E AS CONTAS NÃO PAGAS
+
+SELECT v.id, v.datemissao,
+   (SELECT COUNT(p.id) FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NULL) AS naopagas
+FROM venda v
+=======================================================
+
+ALTERANDO OS DADOS DA TABELA VENDAPARCELAS PARA MOSTRAR 
+QUANTAS PARCELAS OFRAM PAGAS E QUANDO FORAM PAGAS
+
+UPDATE vendaparcelas
+SET datapagto = '2023-09-21'
+WHERE idvenda = 1
+AND parcela = 1
+
+UPDATE vendaparcelas
+SET datapagto = '2023-09-15'
+WHERE idvenda = 2
+AND parcela = 1
+=====================================================
+MOSTRA QUAIS PARCELAS ESTÃO PAGAS E
+QUAIS NÃO ESTÃO PAGAS
+
+SELECT v.id, v.datemissao,
+   (SELECT COUNT(p.id) FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NULL) AS naopagas,
+   
+   
+(SELECT COUNT(p.id) 
+FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NOT NULL) AS naopagas
+
+FROM venda v
+======================================================
+
+MOSTRA EMISSÃO PARCELAS NAO PAGAS PAGAS EQUANTIDADE DE PARCELAS NAO PAGAS
+
+SET sql_mode='ANSI' -- MUDANÇA DE MODO (SENÃO COLOCAR NÃO FUNCIONA, FUNCIONA SEPARADO DA APLICAÇÃO)
+
+SELECT v.id, v.datemissao,
+   (SELECT COUNT(p.id) FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NULL) AS naopagas,
+   
+   
+(SELECT COUNT(p.id) 
+FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NOT NULL) AS pagas,
+
+
+
+(SELECT COUNT(p.id) 
+FROM vendaparcelas p
+   WHERE p.idvenda = v.id 
+   AND p.datapagto IS NOT NULL) || '/' ||
+
+(SELECT COUNT(p.id) 
+FROM vendaparcelas p
+   WHERE p.idvenda = v.id) AS parcelaspagas
+
+
+FROM venda v

@@ -1,0 +1,94 @@
+Criação das tabelas e inserção de valores:
+
+CREATE DATABASE aula1;
+USE aula1;
+
+CREATE TABLE tabelaA(
+nome VARCHAR (20)
+);
+
+CREATE TABLE tabelaB(
+nome VARCHAR(20)
+);
+
+INSERT INTO tabelaA VALUES ('JOAO');
+INSERT INTO tabelaA VALUES ('PEDRO');
+INSERT INTO tabelaA VALUES ('TIAGO');
+INSERT INTO tabelaA VALUES ('MATEUS');
+
+INSERT INTO tabelaB VALUES ('JOAO');
+INSERT INTO tabelaB VALUES ('PEDRO');
+INSERT INTO tabelaB VALUES ('ANDRE');
+INSERT INTO tabelaB VALUES ('LUCAS');
+=================================================
+INNER JOIN: Possui duas formas.
+
+SELECT a.nome, b.nome
+FROM tabelaA A, tabelaB B
+WHERE a.nome = b.nome
+
+2ª FORMA
+
+SELECT a.nome, b.nome
+FROM tabelaA A INNER JOIN tabelaB B
+ON a.nome = b.nome
+
+-------------------------------------------------------
+
+LEFT JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaA A LEFT JOIN tabelaB B
+ON a.nome = b.nome
+========================================================
+RIGHT JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaa A RIGHT JOIN tabelab B
+ON a.nome = b.nome
+===========================================================
+NATURAL JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaa A NATURAL JOIN tabelab B
+========================================================
+OUTER JOIN (NO HEIDI SQL = UNION)
+
+SELECT a.nome, b.nome
+FROM tabelaA A LEFT JOIN tabelaB B
+ON a.nome = b.nome
+
+UNION 
+
+SELECT a.nome, b.nome
+FROM tabelaA A RIGHT JOIN tabelaB B
+ON a.nome = b.nome
+===============================================================
+LEFT EXCLUDING JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaA A LEFT JOIN tabelaB B
+ON a.nome = b.nome
+WHERE b.NOME IS NULL
+=====================================================================
+RIGHT EXCLUDING JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaA A RIGHT JOIN tabelaB B
+ON a.nome = b.nome
+WHERE a.NOME IS NULL
+===============================================
+OUTER EXCLUDING JOIN:
+
+SELECT a.nome, b.nome
+FROM tabelaA A LEFT JOIN tabelaB B
+ON a.nome = b.nome
+WHERE b.NOME IS NULL
+
+UNION 
+
+SELECT a.nome, b.nome
+FROM tabelaA A RIGHT JOIN tabelaB B
+ON a.nome = b.nome
+WHERE a.NOME IS NULL
+==================================================

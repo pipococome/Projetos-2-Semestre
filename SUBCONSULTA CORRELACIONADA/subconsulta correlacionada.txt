@@ -1,0 +1,5 @@
+SELECT c.nome
+FROM cliente c
+WHERE 1 < (SELECT COUNT(v.id)
+           FROM venda v
+           WHERE v.idcliente  = c.id)
